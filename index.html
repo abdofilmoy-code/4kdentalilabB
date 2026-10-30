@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4K Dental Lab</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-top: #0f172a;
+            --bg-bottom: #020617;
+            --bg-grad: linear-gradient(135deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --gold-primary: #fbbf24;
+            --gold-light: #fef08a;
+            --neon-cyan: #22d3ee;
+            --font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+        }
+
+        body {
+            background: var(--bg-grad);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0 30px;
+            position: relative;
+        }
+
+        .logo-section {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--gold-light);
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+            animation: textStyleChange 5s infinite;
+        }
+
+        @keyframes textStyleChange {
+            0% { letter-spacing: 2px; }
+            50% { letter-spacing: 6px; color: var(--gold-primary); }
+            100% { letter-spacing: 2px; }
+        }
+
+        .lab-subtitle {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        /* Offers Banner */
+        .offers-container {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .offer-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 1;
+        }
+
+        .discount-badge {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+            color: #0f172a;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            min-width: 90px;
+        }
+
+        .discount-badge .value {
+            font-size: 2rem;
+            font-weight: 800;
+            display: block;
+            line-height: 1;
+        }
+
+        .discount-badge .label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .offer-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.6;
+            color: #ffffff;
+            animation: textShimmer 4s infinite linear;
+            background: linear-gradient(90deg, #fff, var(--neon-cyan), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes textShimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Section Banner */
+        .marquee-container {
+            background: rgba(30, 41, 59, 0.6);
+            padding: 8px 0;
+            border-radius: 8px;
+            margin: 10px 0 20px 0;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .marquee-text {
+            white-space: nowrap;
+            animation: marquee 22s linear infinite;
+            color: var(--gold-light);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Categories & Items with Distinct Theme Accents */
+        .category-title {
+            padding: 12px 20px;
+            border-radius: 8px 0 0 8px;
+            margin: 35px 0 10px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* 1. Fixed Theme (Amber/Gold) */
+        .cat-fixed { background: linear-gradient(90deg, #332900, #1e1700); border-right: 5px solid #fbbf24; color: #fef08a; }
+        .price-fixed { background: #fef08a; color: #1e1700; }
+        .card-fixed { border-right: 4px solid #fbbf24; }
+        
+        /* 2. Removable Theme (Cyan/Blue) */
+        .cat-removable { background: linear-gradient(90deg, #082f49, #0f172a); border-right: 5px solid #22d3ee; color: #7dd3fc; }
+        .price-removable { background: #7dd3fc; color: #082f49; }
+        .card-removable { border-right: 4px solid #22d3ee; }
+
+        /* 3. Orthodontics Theme (Emerald/Teal) */
+        .cat-ortho { background: linear-gradient(90deg, #064e3b, #022c22); border-right: 5px solid #34d399; color: #a7f3d0; }
+        .price-ortho { background: #a7f3d0; color: #022c22; }
+        .card-ortho { border-right: 4px solid #34d399; }
+
+        /* 4. CAD/CAM Theme (Purple/Indigo) */
+        .cat-cad { background: linear-gradient(90deg, #3b0764, #1e1b4b); border-right: 5px solid #c084fc; color: #e9d5ff; }
+        .price-cad { background: #e9d5ff; color: #3b0764; }
+        .card-cad { border-right: 4px solid #c084fc; }
+
+        .items-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .item-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .item-card:hover {
+            background: rgba(51, 65, 85, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .item-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .item-desc {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .item-price {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            white-space: nowrap;
+        }
+
+        /* Representatives */
+        .reps-section {
+            margin-top: 50px;
+            padding-bottom: 20px;
+        }
+
+        .reps-title {
+            text-align: center;
+            color: var(--gold-light);
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .reps-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .rep-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px;
+            width: 270px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .rep-name {
+            font-size: 1.2rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .rep-role {
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .rep-phone {
+            font-size: 1rem;
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 12px;
+            background: rgba(15, 23, 42, 0.5);
+            padding: 6px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+
+        .rep-btns {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 5px;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 8px 4px;
+            border-radius: 8px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-size: 0.8rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-call { background-color: var(--neon-cyan); color: #0c4a6e; }
+        .btn-wa { background-color: #25d366; color: #ffffff; }
+        .btn-tg { background-color: #0088cc; color: #ffffff; }
+        .btn-action:hover { opacity: 0.9; }
+
+        .divider-emoji {
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .actions-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn-share {
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-share:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            .reps-container { flex-direction: column; align-items: center; }
+            .rep-card { width: 100%; }
+            .divider-emoji { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo-section">4K</div>
+        <div class="lab-subtitle">4K Dental Lab</div>
+    </header>
+
+    <!-- Dynamic Cycling Offers -->
+    <div class="offers-container">
+        <div class="offer-card" id="offerCard">
+            <div class="discount-badge">
+                <span class="value" id="discountValue">20%</span>
+                <span class="label">خصم</span>
+            </div>
+            <div class="offer-text" id="offerText">خصم 20% للدكاترة الجداد</div>
+        </div>
+    </div>
+
+    <!-- 1. Fixed Prosthetics -->
+    <div class="category-title cat-fixed">
+        <i class="fa-solid fa-crown"></i> التركيبات الثابتة
+    </div>
+    <div class="marquee-container">
+        <div class="marquee-text">
+            ✨ خامات ألمانية وإيطالية أصلية ⚡ دقة متناهية في السيراميك والزيركون ⚡ تسليم في المواعيد المحددة ⚡
+        </div>
+    </div>
+    <div class="items-grid">
+        <div class="item-card card-fixed">
+            <div class="item-info">
+                <span class="item-name">PFM Vita</span>
+                <span class="item-desc">بورسلين على معدن فيتا الألماني</span>
+            </div>
+            <span class="item-price price-fixed">250 EGP</span>
+        </div>
+        <div class="item-card card-fixed">
+            <div class="item-info">
+                <span class="item-name">PFM VM/13</span>
+                <span class="item-desc">بورسلين على معدن VM/13</span>
+            </div>
+            <span class="item-price price-fixed">300 EGP</span>
+        </div>
+        <div class="item-card card-fixed">
+            <div class="item-info">
+                <span class="item-name">PFM CAD CAM</span>
+                <span class="item-desc">معدن مصمم بتقنية الكاد كام</span>
+            </div>
+            <span class="item-price price-fixed">330 EGP</span>
+        </div>
+        <div class="item-card card-fixed">
+            <div class="item-info">
+                <span class="item-name">Zirconia</span>
+                <span class="item-desc">زيركون كامل يتميز بقوة ومتانة عالية</span>
+            </div>
+            <span class="item-price price-fixed">550 EGP</span>
+        </div>
+        <div class="item-card card-fixed">
+            <div class="item-info">
+                <span class="item-name">Zolid / Katana</span>
+                <span class="item-desc">زيركون عالي الشفافية والجمالية</span>
+            </div>
+            <span class="item-price price-fixed">750 EGP</span>
+        </div>
+        <div class="item-card card-fixed">
+            <div class="item-info">
+                <span class="item-name">Zirconia E-max</span>
+                <span class="item-desc">زيركون مغطى بطبقة إيماكس للمظهر الطبيعي</span>
+            </div>
+            <span class="item-price price-fixed">900 EGP</span>
+        </div>
+        <div class="item-card card-fixed">
+            <div class="item-info">
+                <span class="item-name">E-max / Veneer</span>
+                <span class="item-desc">فينير وإيماكس للابتسامة التجميلية</span>
+            </div>
+            <span class="item-price price-fixed">1500 EGP</span>
+        </div>
+        <div class="item-card card-fixed">
+            <div class="item-info">
+                <span class="item-name">Inlay / Onlay / Overlay</span>
+                <span class="item-desc">حشوات تجميلية مخبرية</span>
+            </div>
+            <span class="item-price price-fixed">600 EGP</span>
+        </div>
+        <div class="item-card card-fixed">
+            <div class="item-info">
+                <span class="item-name">Metal Crown</span>
+                <span class="item-desc">تاج معدني كامل</span>
+            </div>
+            <span class="item-price price-fixed">150 EGP</span>
+        </div>
+        <div class="item-card card-fixed">
+            <div class="item-info">
+                <span class="item-name">Zirconia Prettau</span>
+                <span class="item-desc">زيركون بريتاو الألماني للجسور الطويلة</span>
+            </div>
+            <span class="item-price price-fixed">800 EGP</span>
+        </div>
+    </div>
+
+    <!-- 2. Removable Prosthetics -->
+    <div class="category-title cat-removable">
+        <i class="fa-solid fa-teeth-open"></i> التركيبات المتحركة
+    </div>
+    <div class="marquee-container">
+        <div class="marquee-text">
+            🦷 أطقم مرنة وعالية الراحة للمريض ⚡ دقة في المقاسات وثبات تام ⚡ خامات مطابقة للمواصفات القياسية ⚡
+        </div>
+    </div>
+    <div class="items-grid">
+        <div class="item-card card-removable">
+            <div class="item-info">
+                <span class="item-name">Complete Denture</span>
+                <span class="item-desc">طقم أسنان متحرك كامل</span>
+            </div>
+            <span class="item-price price-removable">2000 EGP</span>
+        </div>
+        <div class="item-card card-removable">
+            <div class="item-info">
+                <span class="item-name">One teeth denture</span>
+                <span class="item-desc">تركيب سن واحد متحرك</span>
+            </div>
+            <span class="item-price price-removable">150 EGP</span>
+        </div>
+        <div class="item-card card-removable">
+            <div class="item-info">
+                <span class="item-name">Complete Flexible</span>
+                <span class="item-desc">طقم فليكس مرن ومريح بالكامل</span>
+            </div>
+            <span class="item-price price-removable">3500 EGP</span>
+        </div>
+        <div class="item-card card-removable">
+            <div class="item-info">
+                <span class="item-name">One Teeth Flexible</span>
+                <span class="item-desc">سنة واحدة فليكس مرنة</span>
+            </div>
+            <span class="item-price price-removable">300 EGP</span>
+        </div>
+        <div class="item-card card-removable">
+            <div class="item-info">
+                <span class="item-name">Soft Retainer</span>
+                <span class="item-desc">واقي ليلي مرن</span>
+            </div>
+            <span class="item-price price-removable">500 EGP</span>
+        </div>
+        <div class="item-card card-removable">
+            <div class="item-info">
+                <span class="item-name">Hard Retainer</span>
+                <span class="item-desc">واقي ليلي صلب</span>
+            </div>
+            <span class="item-price price-removable">400 EGP</span>
+        </div>
+        <div class="item-card card-removable">
+            <div class="item-info">
+                <span class="item-name">Hawley Retainer</span>
+                <span class="item-desc">مثبت تقويم هاولي التقليدي</span>
+            </div>
+            <span class="item-price price-removable">600 EGP</span>
+        </div>
+        <div class="item-card card-removable">
+            <div class="item-info">
+                <span class="item-name">Space Maintainer</span>
+                <span class="item-desc">حافظ مسافة</span>
+            </div>
+            <span class="item-price price-removable">230 EGP</span>
+        </div>
+        <div class="item-card card-removable">
+            <div class="item-info">
+                <span class="item-name">Space Maintainer crown</span>
+                <span class="item-desc">تاج حافظ مسافة</span>
+            </div>
+            <span class="item-price price-removable">300 EGP</span>
+        </div>
+    </div>
+
+    <!-- 3. Orthodontics & Pediatric -->
+    <div class="category-title cat-ortho">
+        <i class="fa-solid fa-child"></i> التقويم وأسنان الأطفال
+    </div>
+    <div class="marquee-container">
+        <div class="marquee-text">
+            👶 أجهزة تقويم وأسنان أطفال مصممة بعناية فائقة ⚡ نتائج فعالة وسريعة لتعديل الاكلودشن والفكين ⚡
+        </div>
+    </div>
+    <div class="items-grid">
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">Band</span>
+                <span class="item-desc">باند للتقويم</span>
+            </div>
+            <span class="item-price price-ortho">100 EGP</span>
+        </div>
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">Stainless crown</span>
+                <span class="item-desc">تاج ستانلس ستيل لأطفال</span>
+            </div>
+            <span class="item-price price-ortho">150 EGP</span>
+        </div>
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">Space maintainer</span>
+                <span class="item-desc">حافظ مسافة للتقويم</span>
+            </div>
+            <span class="item-price price-ortho">250 EGP</span>
+        </div>
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">Tpa</span>
+                <span class="item-desc">جهاز توسيع الفك</span>
+            </div>
+            <span class="item-price price-ortho">500 EGP</span>
+        </div>
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">Lingual arch</span>
+                <span class="item-desc">قوس لساني</span>
+            </div>
+            <span class="item-price price-ortho">500 EGP</span>
+        </div>
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">Hawley retainer</span>
+                <span class="item-desc">ريتينر هاولي للتقويم</span>
+            </div>
+            <span class="item-price price-ortho">600 EGP</span>
+        </div>
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">Twin block</span>
+                <span class="item-desc">توين بلوك لتعديل الفك</span>
+            </div>
+            <span class="item-price price-ortho">1000 EGP</span>
+        </div>
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">Tango gard</span>
+                <span class="item-desc">تانجو جارد لحماية الأسنان</span>
+            </div>
+            <span class="item-price price-ortho">600 EGP</span>
+        </div>
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">Screw</span>
+                <span class="item-desc">مسمار توسيع للتقويم</span>
+            </div>
+            <span class="item-price price-ortho">800 EGP</span>
+        </div>
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">Hyrax</span>
+                <span class="item-desc">جهاز هياكس السريع لتوسيع الفك</span>
+            </div>
+            <span class="item-price price-ortho">2800 EGP</span>
+        </div>
+        <div class="item-card card-ortho">
+            <div class="item-info">
+                <span class="item-name">إضافة لوب لكراون أو باند</span>
+                <span class="item-desc">إضافة حلقة معدنية</span>
+            </div>
+            <span class="item-price price-ortho">150 EGP</span>
+        </div>
+    </div>
+
+    <!-- 4. CAD/CAM Section -->
+    <div class="category-title cat-cad">
+        <i class="fa-solid fa-laptop-code"></i> الكاد كام
+    </div>
+    <div class="marquee-container">
+        <div class="marquee-text">
+            💻 تقنية رقمية حديثة بدقة المايكرون ⚡ طباعة ثلاثية الأبعاد ومرشحات جراحية مطورة ⚡
+        </div>
+    </div>
+    <div class="items-grid">
+        <div class="item-card card-cad">
+            <div class="item-info">
+                <span class="item-name">3D Printed Model (للفك الواحد)</span>
+                <span class="item-desc">طباعة موديل دقيق ثلاثي الأبعاد</span>
+            </div>
+            <span class="item-price price-cad">150 EGP</span>
+        </div>
+        <div class="item-card card-cad">
+            <div class="item-info">
+                <span class="item-name">3D Printed Castable Wax/Resin</span>
+                <span class="item-desc">طباعة شمع/ريزن قابل للصب</span>
+            </div>
+            <span class="item-price price-cad">200 EGP</span>
+        </div>
+        <div class="item-card card-cad">
+            <div class="item-info">
+                <span class="item-name">Surgical Guide</span>
+                <span class="item-desc">المرشد الجراحي للزراعة بدقة</span>
+            </div>
+            <span class="item-price price-cad">600 EGP</span>
+        </div>
+        <div class="item-card card-cad">
+            <div class="item-info">
+                <span class="item-name">PMMA Milling Temporary Crown</span>
+                <span class="item-desc">تاج مؤقت محفور من البولي ميثيل ميثاكريلات</span>
+            </div>
+            <span class="item-price price-cad">120 EGP</span>
+        </div>
+        <div class="item-card card-cad">
+            <div class="item-info">
+                <span class="item-name">CAD Design Only</span>
+                <span class="item-desc">تصميم STL فقط للمعمل أو الطبيب</span>
+            </div>
+            <span class="item-price price-cad">80 EGP</span>
+        </div>
+    </div>
+
+    <!-- Representatives Section -->
+    <div class="reps-section">
+        <div class="reps-title">مناديب الخطوط</div>
+        <div class="reps-container">
+            <!-- Abdulrahman Fathi -->
+            <div class="rep-card">
+                <div>
+                    <div class="rep-name">Abdulrahman Fathi</div>
+                    <div class="rep-role">خط القاهرة والقليوبية</div>
+                    <div class="rep-phone" dir="ltr">01094617107</div>
+                </div>
+                <div class="rep-btns">
+                    <a href="tel:01094617107" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> اتصال</a>
+                    <a href="https://wa.me/201094617107" target="_blank" class="btn-action btn-wa"><i class="fa-brands fa-whatsapp"></i> واتس</a>
+                    <a href="https://t.me/01094617107" target="_blank" class="btn-action btn-tg"><i class="fa-brands fa-telegram"></i> تلكرام</a>
+                </div>
+            </div>
+
+            <div class="divider-emoji">🤝</div>
+
+            <!-- Abdullah Yasser -->
+            <div class="rep-card">
+                <div>
+                    <div class="rep-name">Abdullah Yasser</div>
+                    <div class="rep-role">خط المنوفية والبحيرة</div>
+                    <div class="rep-phone" dir="ltr">01227840903</div>
+                </div>
+                <div class="rep-btns">
+                    <a href="tel:01227840903" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> اتصال</a>
+                    <a href="https://wa.me/201227840903" target="_blank" class="btn-action btn-wa"><i class="fa-brands fa-whatsapp"></i> واتس</a>
+                    <a href="https://t.me/01227840903" target="_blank" class="btn-action btn-tg"><i class="fa-brands fa-telegram"></i> تلكرام</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions-container">
+            <button class="btn-share" onclick="copyPageLink()"><i class="fa-solid fa-copy"></i> نسخ الرابط</button>
+            <button class="btn-share" onclick="sharePage()"><i class="fa-solid fa-share-nodes"></i> مشاركة</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Offers configuration
+    const offers = [
+        {
+            discount: "20%",
+            text: "خصم 20% للدكاترة الجداد"
+        },
+        {
+            discount: "10%",
+            text: "خصم 10% لو دكتور رشح المعمل لصديق له وصديقه تعامل معانا"
+        },
+        {
+            discount: "عروض",
+            text: "أول 10 أيام من كل شهر يوجد عروض لجميع الدكاترة"
+        }
+    ];
+
+    let currentOfferIndex = 0;
+    const discountValueElement = document.getElementById("discountValue");
+    const offerTextElement = document.getElementById("offerText");
+    const offerCardElement = document.getElementById("offerCard");
+
+    function rotateOffers() {
+        offerCardElement.style.opacity = "0";
+        setTimeout(() => {
+            const currentOffer = offers[currentOfferIndex];
+            discountValueElement.innerText = currentOffer.discount;
+            offerTextElement.innerText = currentOffer.text;
+            offerCardElement.style.opacity = "1";
+            currentOfferIndex = (currentOfferIndex + 1) % offers.length;
+        }, 500);
+    }
+
+    // Initialize Offers Rotation
+    rotateOffers();
+    setInterval(rotateOffers, 5000);
+
+    function copyPageLink() {
+        navigator.clipboard.writeText(window.location.href);
+        alert("تم نسخ رابط الموقع بنجاح!");
+    }
+
+    function sharePage() {
+        if (navigator.share) {
+            navigator.share({
+                title: '4K Dental Lab',
+                url: window.location.href
+            }).catch(err => copyPageLink());
+        } else {
+            copyPageLink();
+        }
+    }
+</script>
+
+</body>
+</html>
